@@ -1,53 +1,35 @@
-import React, { Component } from 'react'
+import React, {useRef} from 'react'
+import { Form, Card, Button } from 'react-bootstrap'
 
-class SignUp extends Component {
-
-    state = {
-        email: '',
-        password: '',
-        firstName: '',
-        lastName: ''
-    }
-
-    handleChange = (e) => {
-        this.setState({
-            [e.target.id]: e.target.value
-        })
-    }
-
-    handleSubmit = (e) => {
-        e.preventDefault()
-        console.log(this.state)
-    }
-
-    render() {
-        return (
-            <div className="container">
-                <form onSubmit={this.handleSubmit} className="white">
-                    <h5 className="grey-text text-darken-3">Sign Up</h5>
-                    <div className="input-field">
-                        <label htmlFor="email">Email</label>
-                        <input type="email" id="email" onChange={this.handleChange} />
-                    </div>
-                    <div className="input-field">
-                        <label htmlFor="password">Password</label>
-                        <input type="password" id="password" onChange={this.handleChange} />
-                    </div>
-                    <div className="input-field">
-                        <label htmlFor="firstname">First Name</label>
-                        <input type="text" id="firstName" onChange={this.handleChange} />
-                    </div>
-                    <div className="input-field">
-                        <label htmlFor="lastname">Last Name</label>
-                        <input type="text" id="lastName" onChange={this.handleChange} />
-                    </div>
-                    <div className="input-field">
-                        <button className="btn pink lighten-1 z-depth-0">Sign Up</button>
-                    </div>
-                </form>
+export default function Signup() {
+        const emailRef = useRef()
+        const passwordRef = useRef()
+        const passwordConfirmRef = useRef()
+    return(
+        <>
+            <Card>
+                <Card.Body>
+                    <h2 className="text-center mb-4">Sign Up</h2>
+                    <Form>
+                    <Form.Group id="email">
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control type="email" ref={emailRef} required />
+                    </Form.Group>
+                    <Form.Group id="password">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control type="password" ref={passwordRef} required />
+                    </Form.Group>
+                    <Form.Group id="password-confirm">
+                        <Form.Label>Password Confirmation</Form.Label>
+                        <Form.Control type="password" ref={passwordConfirmRef} required />
+                    </Form.Group>
+                    <Button className="w-100" type="submit">Sign Up</Button>
+                    </Form>
+                </Card.Body>
+            </Card>
+            <div className="w-100 text-center mt-2">
+                Already have an account? Log In
             </div>
-        )
-    }
+        </>
+    )
 }
-
-export default SignUp
